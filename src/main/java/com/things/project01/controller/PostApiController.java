@@ -1,16 +1,22 @@
 package com.things.project01.controller;
 
-import com.things.project01.dto.PostCreatedDto;
+import com.things.project01.dto.PostRequestDto;
+import com.things.project01.service.PostService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class PostApiController {
 
-    @PostMapping("/post/created")
-    public ResponseEntity created(@RequestBody PostCreatedDto createdDto) {
+    private PostService postService;
+
+    public PostApiController(PostService postService) {
+        this.postService = postService;
+    }
+
+    @PostMapping("/api/created")
+    public ResponseEntity created(@RequestBody PostRequestDto createdDto) {
+        postService.created(createdDto);
         return ResponseEntity.ok().build();
     }
 }

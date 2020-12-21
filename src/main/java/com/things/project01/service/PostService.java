@@ -1,5 +1,8 @@
 package com.things.project01.service;
 
-public interface PostService {
+import com.things.project01.domain.Post;
+import com.things.project01.dto.PostRequestDto;
 
+public interface PostService {
+    public Post created(PostRequestDto createdDto);
 }

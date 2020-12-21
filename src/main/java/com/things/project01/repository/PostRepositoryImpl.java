@@ -14,9 +14,8 @@ public class PostRepositoryImpl implements PostRepository {
     }
 
     @Override
-    public Post created(Post post) {
+    public void created(Post post) {
         em.persist(post);
-        return post;
     }
 
     @Override
