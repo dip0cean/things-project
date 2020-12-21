@@ -1,0 +1,31 @@
+{{>layout/header}}
+<div class="position-relative me-5 ms-5 pe-5 ps-5">
+    <div class="text-center mt-5 mb-5">
+        <h1>Create Page</h1>
+    </div>
+    <div class="me-5 ms-5 pe-5 ps-5">
+        <form class="row g-3" action="/post/created">
+            <div class="col-12">
+                <label for="inputEmail4" class="form-label">Title</label>
+                <input type="title" class="form-control" id="title">
+            </div>
+            <div class="col-md-6">
+                <label for="inputPassword4" class="form-label">Author</label>
+                <input type="password" class="form-control" id="author">
+            </div>
+            <div class="col-md-6">
+                <label for="inputPassword4" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password">
+            </div>
+            <div class="col-12">
+                <label for="inputAddress" class="form-label">Content</label>
+                <textarea class="form-control" id="content" placeholder="내용을 입력하세요." style="height: 400px; resize: none;"></textarea>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Sign in</button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+{{>layout/footer}}
