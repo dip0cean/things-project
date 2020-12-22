@@ -1,4 +1,4 @@
-package com.things.project01;
+package com.things.project01.config;
 
 import com.things.project01.repository.PostRepository;
 import com.things.project01.repository.PostRepositoryImpl;

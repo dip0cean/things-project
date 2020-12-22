@@ -13,7 +13,9 @@ import org.springframework.http.MediaType;
 
 import javax.transaction.Transactional;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
+
+@SpringBootTest(webEnvironment = RANDOM_PORT)
 @Transactional
 class PostServiceImplTest {
 

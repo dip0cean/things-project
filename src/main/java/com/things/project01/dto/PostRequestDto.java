@@ -1,15 +1,13 @@
 package com.things.project01.dto;
 
 import com.things.project01.domain.Post;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class PostRequestDto {
     private String title;
     private String content;

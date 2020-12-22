@@ -9,7 +9,7 @@ public interface PostRepository {
     public void created(Post post);
 
     // 게시글 조회
-    public List<Post> findAll(int start, int finish);
+    public List<Post> findAll();
 
     // 게시글 수정
     public Post modified(Post post);

@@ -19,7 +19,7 @@ public class PostRepositoryImpl implements PostRepository {
     }
 
     @Override
-    public List<Post> findAll(int start, int finish) {
+    public List<Post> findAll() {
         return em.createQuery("select p from Post p", Post.class)
                 .getResultList();
     }
