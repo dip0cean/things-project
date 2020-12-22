@@ -46,13 +46,32 @@ const main = {
             contentType: 'application/json; charset-utf-8',
             data: JSON.stringify(data)
         }).done(function () {
-            window.location.href = "/post/modified/" + data.id;
+            window.location.href = "/post/update/" + data.id;
         }).fail(function () {
             alert('비밀번호가 틀렸습니다.');
         })
     },
     update: function() {
-
+        const data = {
+            id: $('#id').val(),
+            title: $('#title').val(),
+            content: $('#content').val(),
+            author: $('#author').val(),
+            password: $('#password').val()
+        };
+        console.log(data.id)
+        $.ajax({
+            method: 'PUT',
+            url: '/api/update',
+            contentType: 'application/json; charset-utf-8',
+            data: JSON.stringify(data)
+        }).done(function(){
+            alert('글을 수정했습니다.');
+            window.location.href = "/post/" + data.id;
+        }).fail(function(){
+            alert('글을 수정할 수 없습니다.');
+            window.location.href = "/post/" + data.id;
+        });
     },
     delete: function() {
 

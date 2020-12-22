@@ -2,14 +2,13 @@ package com.things.project01.controller;
 
 import com.things.project01.dto.PostRequestDto;
 import com.things.project01.service.PostService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class PostApiController {
 
-    private PostService postService;
+    private final PostService postService;
 
     public PostApiController(PostService postService) {
         this.postService = postService;
@@ -27,8 +26,9 @@ public class PostApiController {
         return check;
     }
 
-    @PutMapping("/api/modified")
-    public ResponseEntity modified(@RequestBody PostRequestDto requestDto) {
+    @PutMapping("/api/update")
+    public ResponseEntity update(@RequestBody PostRequestDto requestDto) {
+        postService.update(requestDto);
         return ResponseEntity.ok().build();
     }
 }

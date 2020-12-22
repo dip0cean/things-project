@@ -32,8 +32,8 @@ public class PostController {
         return "post";
     }
 
-    @GetMapping("/post/modified/{id}")
-    public String modified(@PathVariable Long id, Model model) {
+    @GetMapping("/post/update/{id}")
+    public String update(@PathVariable Long id, Model model) {
         model.addAttribute("post", postService.findById(id));
         return "save";
     }

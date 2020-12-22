@@ -70,6 +70,7 @@ class PostServiceImplTest {
     }
 
     @Test
+    @DisplayName("비밀번호 확인")
     void checkPw() {
         created();
         String requestParams =
@@ -82,7 +83,29 @@ class PostServiceImplTest {
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .accept(MediaType.APPLICATION_JSON_VALUE)
                 .body(requestParams)
-                .when().get("/api/check")
+                .when().post("/api/check")
+                .then().log().all()
+                .statusCode(HttpStatus.OK.value());
+    }
+
+    @Test
+    @DisplayName("게시글 수정")
+    void update() {
+        checkPw();
+        // given
+        String requestParams =
+                "{\n" +
+                        "\"id\": \"1\",\n" +
+                        "\"title\": \"테스트제목\",\n" +
+                        "\"content\": \"테스트내용\",\n" +
+                        "\"author\": \"테스트유저\",\n" +
+                        "\"password\": \"4321\"\n" +
+                        "}";
+        RestAssured.given().log().all()
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .accept(MediaType.APPLICATION_JSON_VALUE)
+                .body(requestParams)
+                .when().put("/api/update")
                 .then().log().all()
                 .statusCode(HttpStatus.OK.value());
     }

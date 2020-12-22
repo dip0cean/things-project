@@ -23,7 +23,13 @@
                           style="height: 400px; resize: none;">{{#post}}{{content}}{{/post}}</textarea>
             </div>
             <div class="col-12">
-                <button type="button" class="btn btn-primary" id="btn-created">작성</button>
+                {{#post}}
+                    <input type="hidden" id="id" value="{{id}}">
+                    <button type="button" class="btn btn-primary" id="btn-update">수정</button>
+                {{/post}}
+                {{^post}}
+                    <button type="button" class="btn btn-primary" id="btn-created">작성</button>
+                {{/post}}
                 <a class="btn btn-primary" href="/" role="button">목록</a>
             </div>
         </form>

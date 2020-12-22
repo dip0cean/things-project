@@ -42,4 +42,16 @@ public class PostServiceImpl implements PostService {
         boolean check = post.getPassword().equals(requestDto.getPassword()) ? true : false;
         return check;
     }
+
+    @Override
+    public void update(PostRequestDto requestDto) {
+        Post post = Post.builder()
+                .id(requestDto.getId())
+                .title(requestDto.getTitle())
+                .content(requestDto.getContent())
+                .author(requestDto.getAuthor())
+                .password(requestDto.getPassword())
+                .build();
+        postRepository.update(post);
+    }
 }

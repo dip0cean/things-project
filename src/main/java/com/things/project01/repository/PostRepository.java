@@ -16,7 +16,7 @@ public interface PostRepository {
     public Post findById(Long id);
 
     // 게시글 수정
-    public Post modified(Post post);
+    public void update(Post post);
 
     // 게시글 삭제
     public Post delete(Post post);

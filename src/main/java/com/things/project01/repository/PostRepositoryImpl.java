@@ -1,15 +1,17 @@
 package com.things.project01.repository;
 
 import com.things.project01.domain.Post;
-import com.things.project01.dto.PostRequestDto;
-import com.things.project01.dto.PostResponseDto;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import java.util.List;
 
 public class PostRepositoryImpl implements PostRepository {
 
+    @Autowired
+    private EntityManagerFactory emf;
     private EntityManager em;
 
     public PostRepositoryImpl(EntityManager em) {
@@ -33,8 +35,16 @@ public class PostRepositoryImpl implements PostRepository {
     }
 
     @Override
-    public Post modified(Post post) {
-        return null;
+    public void update(Post post) {
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+        Post changePost = em.find(Post.class, post.getId());
+        changePost.setTitle(post.getTitle());
+        changePost.setContent(post.getContent());
+        changePost.setAuthor(post.getAuthor());
+        changePost.setPassword(post.getPassword());
+        tx.commit();
     }
 
     @Override

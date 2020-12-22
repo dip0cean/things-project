@@ -15,4 +15,6 @@ public interface PostService {
     public Post findById(Long id);
     // 게시글 비밀번호 확인
     public boolean checkPw(PostRequestDto requestDto);
+    // 게시글 수정
+    public void update(PostRequestDto requestDto);
 }
