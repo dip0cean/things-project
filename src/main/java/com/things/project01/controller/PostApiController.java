@@ -31,4 +31,10 @@ public class PostApiController {
         postService.update(requestDto);
         return ResponseEntity.ok().build();
     }
+
+    @DeleteMapping("/api/delete/{id}")
+    public ResponseEntity delete(@PathVariable Long id) {
+        postService.delete(id);
+        return ResponseEntity.ok().build();
+    }
 }

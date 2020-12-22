@@ -5,25 +5,46 @@
     </div>
     <div class="me-5 ms-5 pe-5 ps-5">
         <div class="col-12">
-            <label for="inputEmail4" class="form-label">Title</label>
-            <p>{{post.title}}</p>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Title</span>
+                <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                       aria-describedby="basic-addon1" value="{{post.title}}" readonly style="background-color: white;">
+            </div>
         </div>
-        <div class="col-md-6">
-            <label for="inputPassword4" class="form-label">Author</label>
-            <span>{{post.author}}</span>
-        </div>
-        <div class="col-md-6">
-            <label for="inputPassword4" class="form-label">created</label>
-            <span>{{post.createdDate}}</span>
+        <div class="row">
+            <div class="col-md-6">
+            <span class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Author</span>
+                <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                       aria-describedby="basic-addon1" value="{{post.author}}" readonly
+                       style="background-color: white;">
+            </span>
+            </div>
+            <div class="col-md-6">
+            <span class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Date</span>
+                <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                       aria-describedby="basic-addon1" value="{{post.createdDate}}" readonly
+                       style="background-color: white;">
+            </span>
+            </div>
         </div>
         <div class="col-12">
-            <label for="inputAddress" class="form-label">Content</label>
-            <p>{{post.content}}</p>
+            <div class="input-group">
+                <span class="input-group-text">Content</span>
+                <textarea class="form-control" aria-label="With textarea" readonly
+                          style="resize: none; height: 400px; background-color: white">{{post.content}}</textarea>
+            </div>
         </div>
     </div>
-    <div class="text-end">
+    <div class="text-end mt-5">
         <a class="btn btn-primary" href="/" role="button">목록</a>
-        <a class="btn btn-primary" href="/post/modified/{{post.id}}" role="button"data-bs-toggle="modal" data-bs-target="#exampleModal">수정</a>
+        <button class="btn btn-primary" role="button" data-bs-toggle="modal" data-bs-target="#exampleModal" id="update">
+            수정
+        </button>
+        <button class="btn btn-primary" role="button" data-bs-toggle="modal" data-bs-target="#exampleModal" id="delete">
+            삭제
+        </button>
     </div>
 </div>
 <!-- Modal -->
@@ -31,12 +52,11 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">비밀번호 확인</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form>
-                    <h4>비밀번호 입력</h4>
                     <input type="password" placeholder="비밀번호를 입력하세요." id="password">
                     <input type="hidden" value="{{post.id}}" id="id">
                 </form>

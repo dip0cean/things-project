@@ -12,9 +12,11 @@ public interface PostService {
     // 게시글 전체 조회
     public List<PostResponseDto> findAll();
     // 게시글 단일 조회
-    public Post findById(Long id);
+    public PostResponseDto findById(Long id);
     // 게시글 비밀번호 확인
     public boolean checkPw(PostRequestDto requestDto);
     // 게시글 수정
     public void update(PostRequestDto requestDto);
+    // 게시글 삭제
+    public void delete(Long id);
 }

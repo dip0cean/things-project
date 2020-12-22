@@ -48,7 +48,8 @@ public class PostRepositoryImpl implements PostRepository {
     }
 
     @Override
-    public Post delete(Post post) {
-        return null;
+    public void delete(Long id) {
+        Post post = em.find(Post.class,id);
+        em.remove(post);
     }
 }

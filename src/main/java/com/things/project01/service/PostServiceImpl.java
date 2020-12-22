@@ -32,8 +32,8 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post findById(Long id) {
-        return postRepository.findById(id);
+    public PostResponseDto findById(Long id) {
+        return new PostResponseDto(postRepository.findById(id));
     }
 
     @Override
@@ -53,5 +53,10 @@ public class PostServiceImpl implements PostService {
                 .password(requestDto.getPassword())
                 .build();
         postRepository.update(post);
+    }
+
+    @Override
+    public void delete(Long id) {
+        postRepository.delete(id);
     }
 }

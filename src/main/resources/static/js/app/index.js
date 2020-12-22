@@ -1,20 +1,24 @@
 const main = {
-    init: function() {
+    init: function () {
+        let path;
         const _this = this;
         $('#btn-created').on('click', function () {
             _this.created();
         });
-        $('#btn-check').on('click', function() {
-            _this.check();
+        $('#btn-check').on('click', function () {
+            _this.check(path);
         });
         $('#btn-update').on('click', function () {
             _this.update();
         });
-        $('#btn-delete').on('click', function () {
-            _this.delete();
+        $('#delete').on('click', function () {
+            path = 'delete';
+        });
+        $('#update').on('click', function () {
+            path = 'update';
         });
     },
-    created: function() {
+    created: function () {
         const data = {
             title: $('#title').val(),
             content: $('#content').val(),
@@ -34,7 +38,7 @@ const main = {
             alert(JSON.stringify(error));
         });
     },
-    check: function() {
+    check: function (path) {
         const data = {
             id: $('#id').val(),
             password: $('#password').val()
@@ -46,12 +50,24 @@ const main = {
             contentType: 'application/json; charset-utf-8',
             data: JSON.stringify(data)
         }).done(function () {
-            window.location.href = "/post/update/" + data.id;
+            let url;
+            if(path == 'delete') {
+                $.ajax({
+                    type: 'DELETE',
+                    url: '/api/delete/' + data.id
+                }).done(function() {
+                    window.location.href = '/';
+                }).fail(function() {
+                    alert('글을 삭제할 수 없습니다.');
+                })
+            } else {
+                window.location.href = '/post/update/' + data.id;
+            }
         }).fail(function () {
             alert('비밀번호가 틀렸습니다.');
         })
     },
-    update: function() {
+    update: function () {
         const data = {
             id: $('#id').val(),
             title: $('#title').val(),
@@ -59,22 +75,19 @@ const main = {
             author: $('#author').val(),
             password: $('#password').val()
         };
-        console.log(data.id)
+
         $.ajax({
             method: 'PUT',
             url: '/api/update',
             contentType: 'application/json; charset-utf-8',
             data: JSON.stringify(data)
-        }).done(function(){
+        }).done(function () {
             alert('글을 수정했습니다.');
             window.location.href = "/post/" + data.id;
-        }).fail(function(){
+        }).fail(function () {
             alert('글을 수정할 수 없습니다.');
             window.location.href = "/post/" + data.id;
         });
-    },
-    delete: function() {
-
     }
 }
 

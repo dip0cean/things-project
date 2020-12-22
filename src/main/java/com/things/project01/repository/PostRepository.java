@@ -1,7 +1,6 @@
 package com.things.project01.repository;
 
 import com.things.project01.domain.Post;
-import com.things.project01.dto.PostRequestDto;
 
 import java.util.List;
 
@@ -19,5 +18,5 @@ public interface PostRepository {
     public void update(Post post);
 
     // 게시글 삭제
-    public Post delete(Post post);
+    public void delete(Long id);
 }
