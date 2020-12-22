@@ -51,4 +51,39 @@ class PostServiceImplTest {
                 .then().log().all()
                 .statusCode(HttpStatus.OK.value());
     }
+
+    @Test
+    @DisplayName("게시글 단일 조회")
+    void findById() {
+        created();
+        Long id = 1L;
+
+        // when / then
+        RestAssured.given().log().all()
+                .when().get("/" + id.intValue())
+                .then().log().all()
+                .statusCode(HttpStatus.OK.value());
+    }
+
+    @Test
+    void findAll() {
+    }
+
+    @Test
+    void checkPw() {
+        created();
+        String requestParams =
+                "{\n" +
+                        "\"id\": \"1\",\n" +
+                        "\"password\": \"1234\"\n" +
+                        "}";
+
+        RestAssured.given().log().all()
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .accept(MediaType.APPLICATION_JSON_VALUE)
+                .body(requestParams)
+                .when().get("/api/check")
+                .then().log().all()
+                .statusCode(HttpStatus.OK.value());
+    }
 }

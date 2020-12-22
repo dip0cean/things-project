@@ -30,4 +30,16 @@ public class PostServiceImpl implements PostService {
                 .map(post -> new PostResponseDto(post))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public Post findById(Long id) {
+        return postRepository.findById(id);
+    }
+
+    @Override
+    public boolean checkPw(PostRequestDto requestDto) {
+        Post post = postRepository.findById(requestDto.getId());
+        boolean check = post.getPassword().equals(requestDto.getPassword()) ? true : false;
+        return check;
+    }
 }

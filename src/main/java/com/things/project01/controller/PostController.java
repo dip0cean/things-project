@@ -4,6 +4,7 @@ import com.things.project01.service.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class PostController {
@@ -22,6 +23,18 @@ public class PostController {
 
     @GetMapping("/created")
     public String created() {
-        return "created";
+        return "save";
+    }
+
+    @GetMapping("/post/{id}")
+    public String page(@PathVariable Long id, Model model) {
+        model.addAttribute("post",postService.findById(id));
+        return "post";
+    }
+
+    @GetMapping("/post/modified/{id}")
+    public String modified(@PathVariable Long id, Model model) {
+        model.addAttribute("post", postService.findById(id));
+        return "save";
     }
 }

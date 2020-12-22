@@ -1,17 +1,17 @@
 {{>layout/header}}
 <div class="position-relative me-5 ms-5 pe-5 ps-5">
     <div class="text-center mt-5 mb-5">
-        <h1>Create Page</h1>
+        <h1>{{#post}}Modified{{/post}}{{^post}}Create{{/post}} Page</h1>
     </div>
     <div class="me-5 ms-5 pe-5 ps-5">
         <form class="row g-3">
             <div class="col-12">
                 <label for="inputEmail4" class="form-label">Title</label>
-                <input type="text" class="form-control" id="title">
+                <input type="text" class="form-control" id="title" value="{{#post}}{{title}}{{/post}}">
             </div>
             <div class="col-md-6">
                 <label for="inputPassword4" class="form-label">Author</label>
-                <input type="text" class="form-control" id="author">
+                <input type="text" class="form-control" id="author" value="{{#post}}{{author}}{{/post}}">
             </div>
             <div class="col-md-6">
                 <label for="inputPassword4" class="form-label">Password</label>
@@ -19,10 +19,12 @@
             </div>
             <div class="col-12">
                 <label for="inputAddress" class="form-label">Content</label>
-                <textarea class="form-control" id="content" placeholder="내용을 입력하세요." style="height: 400px; resize: none;"></textarea>
+                <textarea class="form-control" id="content" placeholder="내용을 입력하세요."
+                          style="height: 400px; resize: none;">{{#post}}{{content}}{{/post}}</textarea>
             </div>
             <div class="col-12">
-                <button type="button" class="btn btn-primary" id="btn-created">작성 완료</button>
+                <button type="button" class="btn btn-primary" id="btn-created">작성</button>
+                <a class="btn btn-primary" href="/" role="button">목록</a>
             </div>
         </form>
     </div>

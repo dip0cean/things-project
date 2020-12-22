@@ -1,0 +1,51 @@
+{{>layout/header}}
+<div class="position-relative me-5 ms-5 pe-5 ps-5">
+    <div class="text-center mt-5 mb-5">
+        <h1>Reading Post</h1>
+    </div>
+    <div class="me-5 ms-5 pe-5 ps-5">
+        <div class="col-12">
+            <label for="inputEmail4" class="form-label">Title</label>
+            <p>{{post.title}}</p>
+        </div>
+        <div class="col-md-6">
+            <label for="inputPassword4" class="form-label">Author</label>
+            <span>{{post.author}}</span>
+        </div>
+        <div class="col-md-6">
+            <label for="inputPassword4" class="form-label">created</label>
+            <span>{{post.createdDate}}</span>
+        </div>
+        <div class="col-12">
+            <label for="inputAddress" class="form-label">Content</label>
+            <p>{{post.content}}</p>
+        </div>
+    </div>
+    <div class="text-end">
+        <a class="btn btn-primary" href="/" role="button">목록</a>
+        <a class="btn btn-primary" href="/post/modified/{{post.id}}" role="button"data-bs-toggle="modal" data-bs-target="#exampleModal">수정</a>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <h4>비밀번호 입력</h4>
+                    <input type="password" placeholder="비밀번호를 입력하세요." id="password">
+                    <input type="hidden" value="{{post.id}}" id="id">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                <button type="button" class="btn btn-primary" id="btn-check">확인</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{>layout/footer}}
