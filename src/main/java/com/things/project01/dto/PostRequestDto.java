@@ -16,6 +16,12 @@ public class PostRequestDto {
     private String password;
 
     public Post toEntity() {
-        return Post.builder().title(getTitle()).content(getContent()).author(getAuthor()).password(getPassword()).build();
+        return Post.builder()
+                .id(getId())
+                .title(getTitle())
+                .content(getContent())
+                .author(getAuthor())
+                .password(getPassword())
+                .build();
     }
 }

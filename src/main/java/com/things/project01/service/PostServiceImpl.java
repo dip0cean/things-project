@@ -4,19 +4,17 @@ import com.things.project01.domain.Post;
 import com.things.project01.dto.PostRequestDto;
 import com.things.project01.dto.PostResponseDto;
 import com.things.project01.repository.PostRepository;
+import lombok.RequiredArgsConstructor;
 
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Transactional
+@RequiredArgsConstructor
 public class PostServiceImpl implements PostService {
 
-    private PostRepository postRepository;
-
-    public PostServiceImpl(PostRepository postRepository) {
-        this.postRepository = postRepository;
-    }
+    private final PostRepository postRepository;
 
     @Override
     public Post created(PostRequestDto createdDto) {
@@ -45,13 +43,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void update(PostRequestDto requestDto) {
-        Post post = Post.builder()
-                .id(requestDto.getId())
-                .title(requestDto.getTitle())
-                .content(requestDto.getContent())
-                .author(requestDto.getAuthor())
-                .password(requestDto.getPassword())
-                .build();
+        Post post = requestDto.toEntity();
         postRepository.update(post);
     }
 

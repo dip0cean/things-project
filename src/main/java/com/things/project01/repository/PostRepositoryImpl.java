@@ -1,7 +1,6 @@
 package com.things.project01.repository;
 
 import com.things.project01.domain.Post;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -10,12 +9,12 @@ import java.util.List;
 
 public class PostRepositoryImpl implements PostRepository {
 
-    @Autowired
-    private EntityManagerFactory emf;
-    private EntityManager em;
+    private final EntityManagerFactory emf;
+    private final EntityManager em;
 
-    public PostRepositoryImpl(EntityManager em) {
+    public PostRepositoryImpl(EntityManager em, EntityManagerFactory emf) {
         this.em = em;
+        this.emf = emf;
     }
 
     @Override
@@ -39,17 +38,14 @@ public class PostRepositoryImpl implements PostRepository {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();
-        Post changePost = em.find(Post.class, post.getId());
-        changePost.setTitle(post.getTitle());
-        changePost.setContent(post.getContent());
-        changePost.setAuthor(post.getAuthor());
-        changePost.setPassword(post.getPassword());
+        Post updatePost = em.find(Post.class, post.getId());
+        updatePost.updatePost(post.getTitle(), post.getContent(), post.getAuthor(), post.getPassword());
         tx.commit();
     }
 
     @Override
     public void delete(Long id) {
-        Post post = em.find(Post.class,id);
+        Post post = em.find(Post.class, id);
         em.remove(post);
     }
 }

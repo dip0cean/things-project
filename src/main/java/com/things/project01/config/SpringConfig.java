@@ -9,20 +9,23 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
 @Configuration
 public class SpringConfig {
 
     private EntityManager em;
+    private EntityManagerFactory emf;
 
     @Autowired
-    public SpringConfig(EntityManager em) {
+    public SpringConfig(EntityManager em, EntityManagerFactory emf) {
         this.em = em;
+        this.emf = emf;
     }
 
     @Bean
     public PostRepository postRepository() {
-        return new PostRepositoryImpl(em);
+        return new PostRepositoryImpl(em, emf);
     }
 
     @Bean

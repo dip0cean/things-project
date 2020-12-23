@@ -26,7 +26,7 @@ public class PostApiController {
         return check;
     }
 
-    @PutMapping("/api/update")
+    @PatchMapping("/api/update")
     public ResponseEntity update(@RequestBody PostRequestDto requestDto) {
         postService.update(requestDto);
         return ResponseEntity.ok().build();

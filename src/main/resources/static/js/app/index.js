@@ -77,7 +77,7 @@ const main = {
         };
 
         $.ajax({
-            method: 'PUT',
+            method: 'PATCH',
             url: '/api/update',
             contentType: 'application/json; charset-utf-8',
             data: JSON.stringify(data)

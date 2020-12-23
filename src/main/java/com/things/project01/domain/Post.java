@@ -7,9 +7,6 @@ import javax.persistence.*;
 @Entity
 @Table
 @Getter
-@Setter
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
 public class Post extends BaseTimeEntity{
     @Id
@@ -27,4 +24,20 @@ public class Post extends BaseTimeEntity{
 
     @Column(length = 4, nullable = false)
     private String password;
+
+    @Builder
+    public Post(Long id, String title, String content, String author, String password) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.author = author;
+        this.password = password;
+    }
+
+    public void updatePost(String title, String content, String author, String password) {
+        this.title = title;
+        this.content = content;
+        this.author = author;
+        this.password = password;
+    }
 }
