@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface PostService {
     // 게시글 작성
-    public Post created(PostRequestDto createdDto);
+    public PostResponseDto created(PostRequestDto createdDto);
     // 게시글 전체 조회
     public List<PostResponseDto> findAll();
     // 게시글 단일 조회
