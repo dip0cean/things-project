@@ -33,7 +33,7 @@ const main = {
             data: JSON.stringify(data)
         }).done(function () {
             alert('글이 등록되었습니다.');
-            window.location.href = '/';
+            window.location.href = '/post/1';
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
@@ -49,22 +49,24 @@ const main = {
             url: '/api/check',
             contentType: 'application/json; charset-utf-8',
             data: JSON.stringify(data)
-        }).done(function () {
+        }).done(function (check) {
             let url;
-            if(path == 'delete') {
-                $.ajax({
-                    type: 'DELETE',
-                    url: '/api/delete/' + data.id
-                }).done(function() {
-                    window.location.href = '/';
-                }).fail(function() {
-                    alert('글을 삭제할 수 없습니다.');
-                })
+            if (check) {
+                if (path == 'delete') {
+                    $.ajax({
+                        type: 'DELETE',
+                        url: '/api/delete/' + data.id
+                    }).done(function () {
+                        window.location.href = '/post/1';
+                    }).fail(function () {
+                        alert('글을 삭제할 수 없습니다.');
+                    })
+                } else {
+                    window.location.href = '/post/update/' + data.id;
+                }
             } else {
-                window.location.href = '/post/update/' + data.id;
+                alert("비밀번호가 틀렸습니다.");
             }
-        }).fail(function () {
-            alert('비밀번호가 틀렸습니다.');
         })
     },
     update: function () {
@@ -83,10 +85,10 @@ const main = {
             data: JSON.stringify(data)
         }).done(function () {
             alert('글을 수정했습니다.');
-            window.location.href = "/post/" + data.id;
+            window.location.href = "/post/detail/" + data.id;
         }).fail(function () {
             alert('글을 수정할 수 없습니다.');
-            window.location.href = "/post/" + data.id;
+            window.location.href = "/post/detail/" + data.id;
         });
     }
 }

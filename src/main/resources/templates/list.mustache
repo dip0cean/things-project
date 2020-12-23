@@ -1,0 +1,36 @@
+{{>layout/header}}
+<div class="position-relative me-5 ms-5 pe-5 ps-5">
+    <div class="text-center mb-5 mt-5">
+        <h1>Posts</h1>
+
+    </div>
+    <table class="table text-center">
+        <thead>
+        <tr>
+            <th scope="col">No</th>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#post}}
+            <tr>
+                <th scope="row">{{id}}</th>
+                <td><a href="/post/detail/{{id}}">{{title}}</a></td>
+                <td>{{author}}</td>
+                <td>{{createdDate}}</td>
+            </tr>
+        {{/post}}
+        </tbody>
+    </table>
+    <div class="text-end">
+        <a class="btn btn-primary" href="/post/created" role="button">글 작성</a>
+    </div>
+    <div class="text-center">
+        {{#block}}
+            <a href="/post/{{.}}">{{.}}</a>
+        {{/block}}
+    </div>
+</div>
+{{>layout/footer}}

@@ -1,5 +1,6 @@
 package com.things.project01.config;
 
+import com.things.project01.repository.PaginationRepository;
 import com.things.project01.repository.PostRepository;
 import com.things.project01.repository.PostRepositoryImpl;
 import com.things.project01.service.PostService;
@@ -16,11 +17,13 @@ public class SpringConfig {
 
     private EntityManager em;
     private EntityManagerFactory emf;
+    private final PaginationRepository paginationRepository;
 
     @Autowired
-    public SpringConfig(EntityManager em, EntityManagerFactory emf) {
+    public SpringConfig(EntityManager em, EntityManagerFactory emf, PaginationRepository paginationRepository) {
         this.em = em;
         this.emf = emf;
+        this.paginationRepository = paginationRepository;
     }
 
     @Bean
@@ -30,6 +33,6 @@ public class SpringConfig {
 
     @Bean
     public PostService postService() {
-        return new PostServiceImpl(postRepository());
+        return new PostServiceImpl(postRepository(),paginationRepository);
     }
 }

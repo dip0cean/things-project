@@ -3,8 +3,14 @@ package com.things.project01.service;
 import com.things.project01.domain.Post;
 import com.things.project01.dto.PostRequestDto;
 import com.things.project01.dto.PostResponseDto;
+import com.things.project01.repository.PaginationRepository;
 import com.things.project01.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -15,18 +21,19 @@ import java.util.stream.Collectors;
 public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
+    private final PaginationRepository paginationRepository;
+
 
     @Override
-    public PostResponseDto created(PostRequestDto createdDto) {
+    public void created(PostRequestDto createdDto) {
         postRepository.created(createdDto.toEntity());
-        return new PostResponseDto(createdDto.toEntity());
     }
 
     @Override
-    public List<PostResponseDto> findAll() {
-        return postRepository.findAll().stream()
-                .map(post -> new PostResponseDto(post))
-                .collect(Collectors.toList());
+    public Page<Post> findAll(Pageable pageable) {
+        int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
+        pageable = PageRequest.of(page, pageable.getPageSize(), Sort.Direction.DESC, "id");
+        return paginationRepository.findAll(pageable);
     }
 
     @Override
