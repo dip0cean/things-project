@@ -27,10 +27,13 @@ public class PostController {
         Page<Post> postList = postService.findAll(pageable);
         model.addAttribute("post", postList);
 
-        int startBlock = (pageable.getPageNumber() - 1) / pageable.getPageSize() * pageable.getPageSize() + 1;
-        int finishBlock = startBlock + pageable.getPageSize() - 1;
-        List<Integer> block = new ArrayList<>();
-        for(int i = startBlock; i <= finishBlock; i++) block.add(i);
+        long startBlock = (pageable.getPageNumber() - 1) / postList.getSize() * postList.getSize() + 1;
+        long blockCount = (postList.getTotalElements() + postList.getSize() - 1) / postList.getSize();
+        long finishBlock = startBlock + postList.getTotalElements() - 1;
+        finishBlock = blockCount < finishBlock ? blockCount : finishBlock;
+
+        List<Long> block = new ArrayList<>();
+        for (long i = startBlock; i <= finishBlock; i++) block.add(i);
         model.addAttribute("block", block);
         return "list";
     }
