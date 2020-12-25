@@ -34,22 +34,24 @@ class PostControllerTest {
     @DisplayName("게시글 등록")
     void 게시글등록() {
         // given
-        String requestParams =
-                "{\n" +
-                        "\"title\": \"title\",\n" +
-                        "\"content\": \"content\",\n" +
-                        "\"author\": \"author\",\n" +
-                        "\"password\": \"1234\"\n" +
-                        "}";
-
         // when / then
-        RestAssured.given().log().all()
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .accept(MediaType.APPLICATION_JSON_VALUE)
-                .body(requestParams)
-                .when().post("/api/created")
-                .then().log().all()
-                .statusCode(HttpStatus.OK.value());
+        for (int i = 0; i < 1000; i++) {
+            String requestParams =
+                    "{\n" +
+                            "\"title\": \"테스트_" + (i + 1) + "\",\n" +
+                            "\"content\": \"테스트\",\n" +
+                            "\"author\": \"테스트\",\n" +
+                            "\"password\": \"1234\"\n" +
+                            "}";
+
+            RestAssured.given().log().all()
+                    .contentType(MediaType.APPLICATION_JSON_VALUE)
+                    .accept(MediaType.APPLICATION_JSON_VALUE)
+                    .body(requestParams)
+                    .when().post("/api/created")
+                    .then().log().all()
+                    .statusCode(HttpStatus.OK.value());
+        }
     }
 
     @Test

@@ -19,7 +19,7 @@
                 <th scope="row">{{id}}</th>
                 <td><a href="/post/detail/{{id}}">{{title}}</a></td>
                 <td>{{author}}</td>
-                <td>{{createdDate}}</td>
+                <td class="created-date">{{createdDate}}</td>
             </tr>
         {{/post}}
         </tbody>
@@ -27,10 +27,48 @@
     <div class="text-end">
         <a class="btn btn-primary" href="/post/created" role="button">글 작성</a>
     </div>
-    <div class="text-center">
-        {{#block}}
-            <a href="/post/{{.}}">{{.}}</a>
-        {{/block}}
+    <div class="text-center position-relative">
+        <ul class="pagination position-absolute top-100 start-50 translate-middle">
+            <li class="page-item">
+                <a class="page-link" id="btn-prev" href="#" style="display: none;">Prev</a>
+            </li>
+            {{#block}}
+                <li class="page-item" id="{{.}}">
+                    <a class="page-link" href="/post/{{.}}">{{.}}</a>
+                </li>
+            {{/block}}
+            <li class="page-item">
+                <a class="page-link" id="btn-next" href="#" style="display: none;">Next</a>
+            </li>
+        </ul>
     </div>
 </div>
+<script>
+    // 현재 페이지블럭 번호가 1이라면 prev 버튼 출력하지 않음.
+    // 현재 페이지블럭 번호가 마지막 번호라면 next 버튼 출력하지 않음.
+    // 그렇다면 마지막 번호는 어떻게 알 수 있을까.
+    $(function () {
+        const block = {{block}};
+        const blockLength = $(block).length;
+        const firstBlock = $(block).get(0);
+        const lastBlock = $(block).get(blockLength - 1);
+
+        // 페이지 번호
+        const path = window.location.pathname;
+        const page = path.split("/").pop();
+
+        // prev
+        if (page > 10 && firstBlock != null) {
+            $('#btn-prev').attr('href', '/post/' + (firstBlock - 1)).css('display', 'inline-block');
+        }
+
+        // next
+        if (lastBlock < {{blockCount}} && blockLength == 10) {
+            $('#btn-next').attr('href', '/post/' + (lastBlock + 1)).css('display', 'inline-block');
+        }
+
+        // 현재 페이지 active
+        $('#' + page).addClass('active');
+    })
+</script>
 {{>layout/footer}}

@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,14 +26,15 @@ public class PostController {
         Page<Post> postList = postService.findAll(pageable);
         model.addAttribute("post", postList);
 
-        long startBlock = (pageable.getPageNumber() - 1) / postList.getSize() * postList.getSize() + 1;
+        long startBlock = (page - 1) / postList.getSize() * postList.getSize() + 1; // (현재 페이지 번호 - 1) / 페이지블럭 기준 * 페이지블럭 기준 + 1
+        long finishBlock = startBlock + postList.getSize() - 1;
         long blockCount = (postList.getTotalElements() + postList.getSize() - 1) / postList.getSize();
-        long finishBlock = startBlock + postList.getTotalElements() - 1;
         finishBlock = blockCount < finishBlock ? blockCount : finishBlock;
 
         List<Long> block = new ArrayList<>();
         for (long i = startBlock; i <= finishBlock; i++) block.add(i);
         model.addAttribute("block", block);
+        model.addAttribute("blockCount", blockCount);
         return "list";
     }
 
