@@ -4,15 +4,12 @@ import com.things.project01.domain.Post;
 import com.things.project01.dto.PostRequestDto;
 import com.things.project01.dto.PostResponseDto;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-
-import java.util.List;
 
 public interface PostService {
     // 게시글 작성
     public void created(PostRequestDto createdDto);
     // 게시글 전체 조회
-    public Page<Post> findAll(Pageable pageable);
+    public Page<Post> findAll(int page);
     // 게시글 단일 조회
     public PostResponseDto findById(Long id);
     // 게시글 비밀번호 확인

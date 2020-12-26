@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import java.util.List;
 
 @RequiredArgsConstructor
 public class PostRepositoryImpl implements PostRepository {
@@ -17,12 +16,6 @@ public class PostRepositoryImpl implements PostRepository {
     @Override
     public void created(Post post) {
         em.persist(post);
-    }
-
-    @Override
-    public List<Post> findAll() {
-        return em.createQuery("select p from Post p", Post.class)
-                .getResultList();
     }
 
     @Override

@@ -20,8 +20,7 @@ public class PostApiController {
 
     @PostMapping("/api/check")
     public boolean check(@RequestBody PostRequestDto requestDto) {
-        boolean check = postService.checkPw(requestDto);
-        return check;
+        return postService.checkPw(requestDto);
     }
 
     @PatchMapping("/api/update")

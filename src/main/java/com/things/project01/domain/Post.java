@@ -19,7 +19,7 @@ public class Post extends BaseTimeEntity{
     @Column(length = 255, nullable = false)
     private String content;
 
-    @Column(length = 30, nullable = false)
+    @Column(length = 255, nullable = false)
     private String author;
 
     @Column(nullable = false)

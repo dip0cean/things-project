@@ -27,9 +27,10 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Page<Post> findAll(Pageable pageable) {
-        int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
-        pageable = PageRequest.of(page, pageable.getPageSize(), Sort.Direction.DESC, "id");
+    public Page<Post> findAll(int page) {
+        int pageSize = 10;
+        page = (page == 0) ? 0 : (page - 1);
+        Pageable pageable = PageRequest.of(page, pageSize, Sort.Direction.DESC, "id");
         return paginationRepository.findAll(pageable);
     }
 
@@ -41,14 +42,12 @@ public class PostServiceImpl implements PostService {
     @Override
     public boolean checkPw(PostRequestDto requestDto) {
         Post post = postRepository.findById(requestDto.getId());
-        boolean check = post.getPassword() == requestDto.getPassword() ? true : false;
-        return check;
+        return post.getPassword() == requestDto.getPassword() ? true : false;
     }
 
     @Override
     public void update(PostRequestDto requestDto) {
-        Post post = requestDto.toEntity();
-        postRepository.update(post);
+        postRepository.update(requestDto.toEntity());
     }
 
     @Override
