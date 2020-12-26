@@ -24,5 +24,5 @@ public abstract class BaseTimeEntity {
     @LastModifiedDate
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(shape= JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
-    private LocalDateTime modifiedDate;
+    private LocalDateTime updatedDate;
 }

@@ -1,21 +1,18 @@
 package com.things.project01.repository;
 
 import com.things.project01.domain.Post;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import java.util.List;
 
+@RequiredArgsConstructor
 public class PostRepositoryImpl implements PostRepository {
 
     private final EntityManagerFactory emf;
     private final EntityManager em;
-
-    public PostRepositoryImpl(EntityManager em, EntityManagerFactory emf) {
-        this.em = em;
-        this.emf = emf;
-    }
 
     @Override
     public void created(Post post) {

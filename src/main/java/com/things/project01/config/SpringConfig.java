@@ -5,7 +5,7 @@ import com.things.project01.repository.PostRepository;
 import com.things.project01.repository.PostRepositoryImpl;
 import com.things.project01.service.PostService;
 import com.things.project01.service.PostServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,22 +13,16 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 @Configuration
+@RequiredArgsConstructor
 public class SpringConfig {
 
-    private EntityManager em;
-    private EntityManagerFactory emf;
+    private final EntityManager em;
+    private final EntityManagerFactory emf;
     private final PaginationRepository paginationRepository;
-
-    @Autowired
-    public SpringConfig(EntityManager em, EntityManagerFactory emf, PaginationRepository paginationRepository) {
-        this.em = em;
-        this.emf = emf;
-        this.paginationRepository = paginationRepository;
-    }
 
     @Bean
     public PostRepository postRepository() {
-        return new PostRepositoryImpl(em, emf);
+        return new PostRepositoryImpl(emf, em);
     }
 
     @Bean

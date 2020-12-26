@@ -3,8 +3,6 @@ package com.things.project01.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table
@@ -24,11 +22,11 @@ public class Post extends BaseTimeEntity{
     @Column(length = 30, nullable = false)
     private String author;
 
-    @Column(length = 4, nullable = false)
-    private String password;
+    @Column(nullable = false)
+    private int password;
 
     @Builder
-    public Post(Long id, String title, String content, String author, String password) {
+    public Post(Long id, String title, String content, String author, int password) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -36,7 +34,7 @@ public class Post extends BaseTimeEntity{
         this.password = password;
     }
 
-    public void updatePost(String title, String content, String author, String password) {
+    public void updatePost(String title, String content, String author, int password) {
         this.title = title;
         this.content = content;
         this.author = author;

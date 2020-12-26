@@ -13,7 +13,7 @@ public class PostRequestDto {
     private String title;
     private String content;
     private String author;
-    private String password;
+    private int password;
 
     public Post toEntity() {
         return Post.builder()

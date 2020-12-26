@@ -41,7 +41,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public boolean checkPw(PostRequestDto requestDto) {
         Post post = postRepository.findById(requestDto.getId());
-        boolean check = post.getPassword().equals(requestDto.getPassword()) ? true : false;
+        boolean check = post.getPassword() == requestDto.getPassword() ? true : false;
         return check;
     }
 
