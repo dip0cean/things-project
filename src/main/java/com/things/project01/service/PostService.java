@@ -7,7 +7,7 @@ import org.springframework.data.domain.Page;
 
 public interface PostService {
     // 게시글 작성
-    public void created(PostRequestDto createdDto);
+    public Long created(PostRequestDto createdDto);
     // 게시글 전체 조회
     public Page<Post> findAll(int page);
     // 게시글 단일 조회

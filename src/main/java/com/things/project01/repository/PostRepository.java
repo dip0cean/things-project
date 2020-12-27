@@ -4,7 +4,7 @@ import com.things.project01.domain.Post;
 
 public interface PostRepository {
     // 게시글 작성
-    public void created(Post post);
+    public Long created(Post post);
 
     // 게시글 단일 조회
     public Post findById(Long id);

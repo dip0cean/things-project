@@ -22,8 +22,8 @@ public class PostServiceImpl implements PostService {
 
 
     @Override
-    public void created(PostRequestDto createdDto) {
-        postRepository.created(createdDto.toEntity());
+    public Long created(PostRequestDto createdDto) {
+        return postRepository.created(createdDto.toEntity());
     }
 
     @Override

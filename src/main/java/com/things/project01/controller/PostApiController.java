@@ -13,14 +13,14 @@ public class PostApiController {
     private final PostService postService;
 
     @PostMapping("/api/created")
-    public ResponseEntity created(@RequestBody PostRequestDto requestDto) {
-        postService.created(requestDto);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<Long> created(@RequestBody PostRequestDto requestDto) {
+        Long id = postService.created(requestDto);
+        return ResponseEntity.ok(id);
     }
 
     @PostMapping("/api/check")
-    public boolean check(@RequestBody PostRequestDto requestDto) {
-        return postService.checkPw(requestDto);
+    public ResponseEntity<Boolean> check(@RequestBody PostRequestDto requestDto) {
+        return ResponseEntity.ok(postService.checkPw(requestDto));
     }
 
     @PatchMapping("/api/update")

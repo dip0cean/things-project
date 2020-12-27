@@ -14,8 +14,9 @@ public class PostRepositoryImpl implements PostRepository {
     private final EntityManager em;
 
     @Override
-    public void created(Post post) {
+    public Long created(Post post) {
         em.persist(post);
+        return post.getId();
     }
 
     @Override
