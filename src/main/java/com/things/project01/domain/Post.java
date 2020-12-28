@@ -8,18 +8,18 @@ import javax.persistence.*;
 @Table
 @Getter
 @NoArgsConstructor
-public class Post extends BaseTimeEntity{
+public class Post extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 255, nullable =  false)
+    @Column(nullable = false)
     private String title;
 
-    @Column(length = 255, nullable = false)
+    @Column(nullable = false)
     private String content;
 
-    @Column(length = 255, nullable = false)
+    @Column(nullable = false)
     private String author;
 
     @Column(nullable = false)
@@ -34,10 +34,10 @@ public class Post extends BaseTimeEntity{
         this.password = password;
     }
 
-    public void updatePost(String title, String content, String author, int password) {
-        this.title = title;
-        this.content = content;
-        this.author = author;
-        this.password = password;
+    public void updatePost(Post post) {
+        this.title = post.getTitle();
+        this.content = post.getContent();
+        this.author = post.getAuthor();
+        this.password = post.getPassword();
     }
 }

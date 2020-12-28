@@ -20,13 +20,15 @@ public class PostController {
 
     @GetMapping("/post/{page}")
     public String index(@PathVariable int page, Model model) {
-        Page<PostResponseDto> postList = postService.findAll(page).map(post -> new PostResponseDto(post));
+        // 게시글 리스트 받아오기
+        Page<PostResponseDto> postList = postService.findAll(page).map(PostResponseDto::new);
         model.addAttribute("post", postList);
 
-        long startBlock = (page - 1) / postList.getSize() * postList.getSize() + 1; // (현재 페이지 번호 - 1) / 페이지블럭 기준 * 페이지블럭 기준 + 1
+        // 페이지블럭 계산 로직
+        long startBlock = (long) (page - 1) / postList.getSize() * postList.getSize() + 1; // (현재 페이지 번호 - 1) / 페이지블럭 기준 * 페이지블럭 기준 + 1
         long finishBlock = startBlock + postList.getSize() - 1;
         long blockCount = (postList.getTotalElements() + postList.getSize() - 1) / postList.getSize();
-        finishBlock = blockCount < finishBlock ? blockCount : finishBlock;
+        finishBlock = Math.min(blockCount, finishBlock);
 
         List<Long> block = new ArrayList<>();
         for (long i = startBlock; i <= finishBlock; i++) block.add(i);

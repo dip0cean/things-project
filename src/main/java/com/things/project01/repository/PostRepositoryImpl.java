@@ -10,7 +10,6 @@ import javax.persistence.EntityTransaction;
 @RequiredArgsConstructor
 public class PostRepositoryImpl implements PostRepository {
 
-    private final EntityManagerFactory emf;
     private final EntityManager em;
 
     @Override
@@ -26,12 +25,8 @@ public class PostRepositoryImpl implements PostRepository {
 
     @Override
     public void update(Post post) {
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction tx = em.getTransaction();
-        tx.begin();
         Post updatePost = em.find(Post.class, post.getId());
-        updatePost.updatePost(post.getTitle(), post.getContent(), post.getAuthor(), post.getPassword());
-        tx.commit();
+        updatePost.updatePost(post);
     }
 
     @Override

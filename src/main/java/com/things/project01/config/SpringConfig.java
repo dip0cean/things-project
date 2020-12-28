@@ -17,12 +17,11 @@ import javax.persistence.EntityManagerFactory;
 public class SpringConfig {
 
     private final EntityManager em;
-    private final EntityManagerFactory emf;
     private final PaginationRepository paginationRepository;
 
     @Bean
     public PostRepository postRepository() {
-        return new PostRepositoryImpl(emf, em);
+        return new PostRepositoryImpl(em);
     }
 
     @Bean
